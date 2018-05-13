@@ -1,4 +1,4 @@
-class Botnuk {
+module.exports = class Botnuk {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -66,7 +66,7 @@ class Botnuk {
                             }
                         }
                     }
-					
+
                     matrix[y][x] = 4;
 
                 }
@@ -75,7 +75,7 @@ class Botnuk {
         }
     }
     die() {
-        
+
         matrix[this.y][this.x] = 0;
         for (var j in this.directions) {
             var x = this.directions[j][0];

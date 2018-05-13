@@ -1,5 +1,4 @@
-
-class Gishatich {
+module.exports = class Enemy {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
@@ -19,7 +18,6 @@ class Gishatich {
             [this.x + 1, this.y + 1]
         ];
     }
-
     chooseCell(character) {
         this.getNewCoordinates();
         var found = [];
@@ -37,21 +35,20 @@ class Gishatich {
     }
 
     mul() {
-		this.multiply++;
+        this.multiply++;
         var emptyCells = this.chooseCell(0);
         var newCell = random(emptyCells);
 
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 3;
+            matrix[newY][newX] = 2;
 
-            var newGishatich = new Gishatich(newX, newY, this.index);
-            gishatichArr.push(newGishatich);
-
+            var newEnemy = new Enemy(newX, newY, this.index);
+            enemyArr.push(newEnemy);
+            this.multiply = 0;
         }
     }
-
     move() {
         this.getNewCoordinates();
         var emptyCells = this.chooseCell(0);
@@ -59,43 +56,41 @@ class Gishatich {
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 3;
+            matrix[newY][newX] = 2;
             matrix[this.y][this.x] = 0;
             this.x = newX;
             this.y = newY;
 
         }
     }
-
     eat() {
         this.getNewCoordinates();
-	var emptyCells = this.chooseCell(2);
+        var emptyCells = this.chooseCell(1);
         var newCell = random(emptyCells);
         if (newCell) {
             matrix[this.y][this.x] = 0;
             var newX = newCell[0];
             var newY = newCell[1];
-            matrix[newY][newX] = 3;
+            matrix[newY][newX] = 2;
             this.energy++;
             this.x = newX;
             this.y = newY;
-            for (var i in enemyArr) {
-                if (newX == enemyArr[i].x && newY == enemyArr[i].y) {
-                    enemyArr.splice(i, 1);
+            for (var i in grassArr) {
+                if (newX == grassArr[i].x && newY == grassArr[i].y) {
+                    grassArr.splice(i, 1);
                     break;
                 }
             }
             if (this.energy >= 13) {
                 this.mul();
-				this.energy == 10;
+                this.energy == 10;
             }
 
 
         }
         else {
-			this.energy-=7;
+            this.energy -= 20;
             this.move();
-
             if (this.energy <= 9) {
                 this.die();
             }
@@ -105,9 +100,9 @@ class Gishatich {
     }
     die() {
         matrix[this.y][this.x] = 0;
-        for (var i in gishatichArr) {
-            if (this.x == gishatichArr[i].x && this.y == gishatichArr[i].y) {
-                gishatichArr.splice(i, 1);
+        for (var i in enemyArr) {
+            if (this.x == enemyArr[i].x && this.y == enemyArr[i].y) {
+                enemyArr.splice(i, 1);
                 break;
             }
         }

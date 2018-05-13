@@ -1,12 +1,9 @@
-class Kendani {
+module.exports = class Grass {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
-        this.energy = 1;
         this.index = index;
         this.multiply = 0;
-    }
-    getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -18,10 +15,7 @@ class Kendani {
             [this.x + 1, this.y + 1]
         ];
     }
-	
-	
-	    chooseCell(character) {
-        this.getNewCoordinates();
+    chooseCell(character) {
         var found = [];
         for (var i in this.directions) {
             var x = this.directions[i][0];
@@ -31,12 +25,22 @@ class Kendani {
                     found.push(this.directions[i]);
                 }
             }
-
         }
         return found;
     }
-   
+    mul() {
+        this.multiply++;
+        var emptyCells = this.chooseCell(0);
+        var newCell = random(emptyCells);
+
+        if (newCell) {
+            var newX = newCell[0];
+            var newY = newCell[1];
+            matrix[newY][newX] = 1;
+
+            var newGrass = new Grass(newX, newY, this.index);
+            grassArr.push(newGrass);
+            this.multiply = 0;
+        }
+    }
 }
-
-
-
