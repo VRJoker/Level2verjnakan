@@ -35,7 +35,8 @@ module.exports = class Botnuk {
         ];
     }
     eat() {
-        this.multiply++
+        botnukeater++;
+        this.multiply++;
         if (this.multiply >= 1) {
             this.getNewCoordinates();
             for (var j in this.directions) {
@@ -76,10 +77,11 @@ module.exports = class Botnuk {
     }
     die() {
 
-        matrix[this.y][this.x] = 0;
+       matrix[this.y][this.x] = 0;
         for (var j in this.directions) {
             var x = this.directions[j][0];
             var y = this.directions[j][1];
+            botnukArr = [];
             matrix[y][x] = 0;
         }
     }

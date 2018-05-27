@@ -39,10 +39,8 @@ module.exports = class Kendani {
         this.multiply++;
         var emptyCells = this.chooseCell(0);
         var index = Math.floor(Math.random() * emptyCells.length);
-        var newCell = emptyCells[index];
+        newCell = emptyCells[index];
 
-
-     
     }
 
 }

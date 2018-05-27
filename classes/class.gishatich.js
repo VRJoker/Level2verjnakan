@@ -14,7 +14,6 @@ module.exports = class Gishatich extends Kendani {
         var emptyCells = this.chooseCell(0);
         var index = Math.floor(Math.random() * emptyCells.length);
         var newCell = emptyCells[index];
-
         if (newCell) {
             var newX = newCell[0];
             var newY = newCell[1];
@@ -27,6 +26,7 @@ module.exports = class Gishatich extends Kendani {
     }
 
     move() {
+        gishatichmover++;
         this.getNewCoordinates();
         var emptyCells = this.chooseCell(0);
         var index = Math.floor(Math.random() * emptyCells.length);
@@ -43,6 +43,7 @@ module.exports = class Gishatich extends Kendani {
     }
 
     eat() {
+        gishaticheater++;
         this.getNewCoordinates();
         var emptyCells = this.chooseCell(2);
         var index = Math.floor(Math.random() * emptyCells.length);
@@ -61,7 +62,7 @@ module.exports = class Gishatich extends Kendani {
                     break;
                 }
             }
-            if (this.energy >= 13) {
+            if (this.energy >= 13 && weather != "winter") {
                 this.mul();
                 this.energy == 10;
             }
